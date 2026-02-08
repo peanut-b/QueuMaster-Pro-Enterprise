@@ -1,0 +1,7 @@
+{
+  "name": "QueueMaster Pro",
+  "description": "A comprehensive enterprise-grade queuing system with real-time monitoring, teller management, and AI-powered voice announcements.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

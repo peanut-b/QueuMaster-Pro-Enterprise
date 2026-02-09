@@ -1,13 +1,19 @@
-
 let audioContext: AudioContext | null = null;
-const speechQueue: {ticketNumber: string, counterNumber: number}[] = [];
-let isSpeaking = false;
+const announcementQueue: {ticketNumber: string, counterNumber: number}[] = [];
+let isPlaying = false;
+let queueSoundBuffer: AudioBuffer | null = null;
 
 // Initialize WebSocket connection for real-time announcements
 let ws: WebSocket | null = null;
 
+// Audio file path - adjust based on your project structure
+const QUEUE_SOUND_PATH = 'sounds/beep.mp3'; // Changed to beep.mp3
+
 export const initializeVoiceService = () => {
-  // Connect to WebSocket for real-time voice coordination
+  // Load the sound file first
+  loadQueueSound();
+  
+  // Connect to WebSocket for real-time announcement coordination
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
   const wsUrl = `${protocol}//${window.location.hostname}:8080`;
   
@@ -15,7 +21,7 @@ export const initializeVoiceService = () => {
     ws = new WebSocket(wsUrl);
     
     ws.onopen = () => {
-      console.log('Voice service WebSocket connected');
+      console.log('Announcement service WebSocket connected');
     };
     
     ws.onmessage = (event) => {
@@ -42,6 +48,54 @@ export const initializeVoiceService = () => {
   }
 };
 
+// Load the queue sound from the file
+const loadQueueSound = async () => {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+  }
+  
+  try {
+    const response = await fetch(QUEUE_SOUND_PATH);
+    if (!response.ok) {
+      throw new Error(`Failed to load sound file: ${response.status}`);
+    }
+    
+    const arrayBuffer = await response.arrayBuffer();
+    queueSoundBuffer = await audioContext.decodeAudioData(arrayBuffer);
+    console.log('Queue sound loaded successfully');
+  } catch (error) {
+    console.error('Failed to load queue sound:', error);
+    // Fallback: Create a simple beep if sound file fails to load
+    createFallbackBeep();
+  }
+};
+
+// Create a simple fallback beep if sound file can't be loaded
+const createFallbackBeep = () => {
+  if (!audioContext) return;
+  
+  try {
+    // Create a simple beep sound - one short beep
+    const duration = 0.5; // Shorter beep
+    const sampleRate = audioContext.sampleRate;
+    const frameCount = sampleRate * duration;
+    
+    const buffer = audioContext.createBuffer(1, frameCount, sampleRate);
+    const data = buffer.getChannelData(0);
+    
+    // Create a simple beep tone
+    const frequency = 800;
+    for (let i = 0; i < frameCount; i++) {
+      data[i] = Math.sin(2 * Math.PI * frequency * i / sampleRate) * 0.3;
+    }
+    
+    queueSoundBuffer = buffer;
+    console.log('Created fallback beep sound');
+  } catch (error) {
+    console.error('Failed to create fallback beep:', error);
+  }
+};
+
 // Broadcast announcement to all connected clients
 export const broadcastAnnouncement = (ticketNumber: string, counterNumber: number) => {
   if (ws && ws.readyState === WebSocket.OPEN) {
@@ -52,108 +106,214 @@ export const broadcastAnnouncement = (ticketNumber: string, counterNumber: numbe
       timestamp: Date.now()
     }));
   }
-  // Also announce locally
-  announceTicket(ticketNumber, counterNumber);
+  // Also announce locally - JUST THE BEEP, NO ANNOUNCEMENT
+  playBeepSoundOnly();
 };
 
+// Modified to just play beep without announcement
 export const announceTicket = async (ticketNumber: string, counterNumber: number) => {
   try {
-    // Use Web Speech API for high-quality speech synthesis
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance();
-      utterance.text = `Ticket ${ticketNumber}, please proceed to counter ${counterNumber}`;
-      utterance.rate = 0.9;
-      utterance.pitch = 1.1;
-      utterance.volume = 1;
-      
-      // Select a voice if available
-      const voices = speechSynthesis.getVoices();
-      const preferredVoice = voices.find(voice => 
-        voice.name.includes('Google') || 
-        voice.name.includes('Microsoft') ||
-        voice.lang.startsWith('en-')
-      );
-      
-      if (preferredVoice) {
-        utterance.voice = preferredVoice;
-      }
-      
-      speechSynthesis.speak(utterance);
-      
-      // Handle speech events
-      utterance.onstart = () => {
-        isSpeaking = true;
-      };
-      
-      utterance.onend = () => {
-        isSpeaking = false;
-        processSpeechQueue();
-      };
-      
-      utterance.onerror = (event) => {
-        console.error('Speech synthesis error:', event);
-        isSpeaking = false;
-        processSpeechQueue();
-      };
-      
-      return true;
-    } else {
-      // Fallback to beep sounds
-      playBeepPattern(ticketNumber, counterNumber);
-      return true;
+    console.log(`🔔 Playing beep for ticket: ${ticketNumber} at counter: ${counterNumber}`);
+    
+    // Add to queue if already playing
+    if (isPlaying) {
+      announcementQueue.push({ ticketNumber, counterNumber });
+      console.log(`Added to queue. Queue length: ${announcementQueue.length}`);
+      return false;
     }
+    
+    isPlaying = true;
+    
+    // Play just the beep sound (no announcement)
+    await playBeepSoundOnly();
+    
+    isPlaying = false;
+    
+    // Process next in queue
+    processAnnouncementQueue();
+    
+    return true;
   } catch (error) {
-    console.error("Voice announcement failed:", error);
-    // Fallback to simple beeps
-    playBeepPattern(ticketNumber, counterNumber);
+    console.error("Beep sound failed:", error);
+    isPlaying = false;
+    processAnnouncementQueue();
     return false;
   }
 };
 
-const playBeepPattern = (ticketNumber: string, counterNumber: number) => {
-  if (!audioContext) {
-    audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
-  }
-  
-  // Create a beep pattern: high beep for ticket, low beeps for counter
-  const oscillator = audioContext.createOscillator();
-  const gainNode = audioContext.createGain();
-  
-  oscillator.connect(gainNode);
-  gainNode.connect(audioContext.destination);
-  
-  // Ticket number beep (high pitch)
-  oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
-  gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
-  
-  oscillator.start();
-  
-  // Beep pattern based on ticket number
-  const beepCount = parseInt(ticketNumber.split('-')[1]) % 5 || 1;
-  
-  for (let i = 0; i < beepCount; i++) {
-    oscillator.frequency.setValueAtTime(
-      600 + i * 100, 
-      audioContext.currentTime + 0.2 * (i + 1)
-    );
-  }
-  
-  // Counter number beep (low pitch)
-  oscillator.frequency.setValueAtTime(400, audioContext.currentTime + 0.2 * (beepCount + 1));
-  
-  oscillator.stop(audioContext.currentTime + 0.2 * (beepCount + 2));
+// New function: Play beep sound only (no announcement)
+const playBeepSoundOnly = async (): Promise<void> => {
+  return new Promise((resolve) => {
+    try {
+      if (!audioContext) {
+        audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      }
+      
+      if (audioContext.state === 'suspended') {
+        audioContext.resume();
+      }
+      
+      if (!queueSoundBuffer) {
+        console.warn('Beep sound not loaded yet. Loading now...');
+        loadQueueSound().then(() => {
+          // Try again after loading
+          playBeepSoundOnly().then(resolve);
+        });
+        return;
+      }
+      
+      // Create audio source
+      const source = audioContext.createBufferSource();
+      source.buffer = queueSoundBuffer;
+      
+      // Create gain node for volume control
+      const gainNode = audioContext.createGain();
+      gainNode.gain.value = 1.0; // Full volume
+      
+      // Connect nodes
+      source.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Play the sound - ONE TIME ONLY
+      source.start();
+      
+      // Resolve after the beep completes
+      setTimeout(() => {
+        resolve();
+      }, queueSoundBuffer.duration * 1000 + 100);
+      
+    } catch (error) {
+      console.error('Failed to play beep sound:', error);
+      
+      // Ultimate fallback: Use HTML5 Audio
+      playHtml5Fallback().then(() => resolve());
+    }
+  });
 };
 
-const processSpeechQueue = () => {
-  if (speechQueue.length > 0 && !isSpeaking) {
-    const next = speechQueue.shift();
+// Modified playQueueSound to just play one beep
+const playQueueSound = async (ticketNumber: string, counterNumber: number): Promise<void> => {
+  // Now just plays a single beep
+  return playBeepSoundOnly();
+};
+
+const playHtml5Fallback = async (): Promise<void> => {
+  return new Promise((resolve) => {
+    try {
+      const audio = new Audio(QUEUE_SOUND_PATH);
+      
+      audio.oncanplaythrough = () => {
+        audio.play().then(() => {
+          setTimeout(() => {
+            resolve();
+          }, (audio.duration * 1000) || 1000);
+        }).catch(e => {
+          console.error('HTML5 audio playback failed:', e);
+          resolve();
+        });
+      };
+      
+      audio.onerror = () => {
+        console.error('HTML5 audio load failed');
+        resolve();
+      };
+      
+      // If browser doesn't support oncanplaythrough
+      setTimeout(() => {
+        if (audio.readyState >= 3) { // HAVE_FUTURE_DATA or more
+          audio.play().then(() => {
+            setTimeout(resolve, 2000);
+          }).catch(() => resolve());
+        } else {
+          resolve();
+        }
+      }, 500);
+      
+    } catch (error) {
+      console.error('HTML5 fallback failed:', error);
+      resolve();
+    }
+  });
+};
+
+const processAnnouncementQueue = () => {
+  if (announcementQueue.length > 0 && !isPlaying) {
+    const next = announcementQueue.shift();
     if (next) {
+      console.log(`Processing queued beep for: ${next.ticketNumber} at counter ${next.counterNumber}`);
       announceTicket(next.ticketNumber, next.counterNumber);
     }
   }
 };
 
-// Initialize voice service when module loads
+// Test function to play the beep
+export const testBeep = (ticketNumber: string = 'B-015', counterNumber: number = 8) => {
+  console.log(`🔊 Testing beep sound`);
+  playBeepSoundOnly();
+};
+
+// Preload audio context and sound on user interaction
+export const preloadAudio = () => {
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    console.log('Audio context preloaded');
+  }
+  
+  // Also preload the sound file
+  loadQueueSound();
+};
+
+// Initialize on user interaction (required by browsers)
 if (typeof window !== 'undefined') {
+  // Initialize on first user interaction
+  const initOnInteraction = () => {
+    preloadAudio();
+    window.removeEventListener('click', initOnInteraction);
+    window.removeEventListener('touchstart', initOnInteraction);
+  };
+  
+  window.addEventListener('click', initOnInteraction);
+  window.addEventListener('touchstart', initOnInteraction);
+  
+  // Initialize WebSocket connection
   setTimeout(initializeVoiceService, 1000);
 }
+
+// Clean up function
+export const cleanupAnnouncementService = () => {
+  if (ws) {
+    ws.close();
+    ws = null;
+  }
+  
+  if (audioContext && audioContext.state !== 'closed') {
+    audioContext.close();
+    audioContext = null;
+  }
+  
+  // Clear buffer and queue
+  queueSoundBuffer = null;
+  announcementQueue.length = 0;
+  isPlaying = false;
+};
+
+// Volume control
+export const setAnnouncementVolume = (volume: number) => {
+  // Store volume for future use
+  console.log(`Volume set to: ${volume}`);
+  // Note: To implement actual volume control, we'd need to store
+  // and apply this to gain nodes when creating audio sources
+};
+
+export const getCurrentStatus = () => ({
+  isPlaying,
+  queueLength: announcementQueue.length,
+  soundLoaded: !!queueSoundBuffer,
+  audioContextState: audioContext?.state
+});
+
+// Function to manually trigger a beep from UI
+export const playBeep = () => {
+  console.log(`Manual beep play`);
+  playBeepSoundOnly();
+};

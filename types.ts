@@ -33,6 +33,7 @@ export interface Ticket {
   completedAt?: number;
   tellerId?: string;
   counterNumber?: number;
+  lastUpdated?: number;
 }
 
 export interface Teller {

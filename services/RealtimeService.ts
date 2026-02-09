@@ -1,11 +1,11 @@
 
-
 export interface RealtimeMessage {
-  type: 'ticket_update' | 'teller_update' | 'category_update' | 'announce' | 'sync' | 'welcome' | 'pong';
+  type: 'ticket_update' | 'teller_update' | 'category_update' | 'admin_account_update' | 'announce' | 'sync' | 'welcome' | 'pong' | 'request_sync';
   data?: any;
   ticket?: any;
   teller?: any;
   category?: any;
+  account?: any;
   ticketNumber?: string;
   counterNumber?: number;
   timestamp?: number;
@@ -14,6 +14,7 @@ export interface RealtimeMessage {
   tickets?: any[];
   categories?: any[];
   tellers?: any[];
+  adminAccounts?: any[];
 }
 
 class RealtimeService {
@@ -29,10 +30,20 @@ class RealtimeService {
   }
 
   private getWebSocketUrl(): string {
+    // For local development
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'ws://localhost:8080';
+    }
+    
+    // For production (Netlify)
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    const hostname = window.location.hostname;
-    const port = window.location.port || (window.location.protocol === 'https:' ? '443' : '80');
-    return `${protocol}//${hostname}:8080`;
+    // You'll need to configure your WebSocket server URL here
+    // For Netlify, you'll need a separate WebSocket server
+    const wsHost = window.location.hostname === 'peaceful-zuccutto-6c5da1.netlify.app' 
+      ? 'your-websocket-server.herokuapp.com'  // You need to deploy a WebSocket server
+      : `${window.location.hostname}:8080`;
+    
+    return `${protocol}//${wsHost}`;
   }
 
   connect(): Promise<boolean> {
@@ -41,6 +52,7 @@ class RealtimeService {
     this.connectionPromise = new Promise((resolve) => {
       try {
         const wsUrl = this.getWebSocketUrl();
+        console.log('Connecting to WebSocket:', wsUrl);
         this.ws = new WebSocket(wsUrl);
 
         this.ws.onopen = () => {
@@ -104,6 +116,10 @@ class RealtimeService {
         this.emit('category_update', message.category);
         break;
 
+      case 'admin_account_update':
+        this.emit('admin_account_update', message.account);
+        break;
+
       case 'announce':
         this.emit('announce', {
           ticketNumber: message.ticketNumber,
@@ -113,9 +129,10 @@ class RealtimeService {
 
       case 'sync':
         this.emit('sync', {
-          tickets: message.tickets,
-          categories: message.categories,
-          tellers: message.tellers
+          tickets: message.tickets || [],
+          categories: message.categories || [],
+          tellers: message.tellers || [],
+          adminAccounts: message.adminAccounts || []
         });
         break;
 
@@ -139,6 +156,10 @@ class RealtimeService {
       return true;
     }
     return false;
+  }
+
+  requestSync(): void {
+    this.send({ type: 'request_sync' });
   }
 
   on(event: string, callback: Function): void {

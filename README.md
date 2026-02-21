@@ -42,7 +42,7 @@ Ensure that all devices (Admin, Teller, Receptionist, Monitor) are connected to 
 
 Each role can access its respective interface once the system is running
 
-🏢 System Components
+## 🏢 System Components
 Admin Dashboard: Central control for managing queues and monitoring activity
 
 Receptionist Interface: Registers customers and issues queue numbers
@@ -51,7 +51,7 @@ Teller Interface: Calls customers and updates queue status
 
 Monitor Display: Shows real-time queue progress for customers
 
-✨ Key Features
+## ✨ Key Features
 Local Operation: Runs independently without internet dependency
 
 Multi-device Support: Connect multiple devices across different roles
@@ -62,17 +62,17 @@ Real-time Updates: Live queue status monitoring and updates
 
 Role-based Interfaces: Dedicated interfaces for each operational role
 
-🌐 Network Requirements
+## 🌐 Network Requirements
 All devices must be connected to the same local network
 
 No internet connection required for operation
 
 Suitable for closed network environments
 
-🔄 Customization
+## 🔄 Customization
 As an open-source system, Queue Master Enterprise can be modified and enhanced to meet your organization's specific requirements. Feel free to adapt the code and interfaces as needed.
 
-📝 Notes
+## 📝 Notes
 Queue Master Enterprise is not web-based; it runs entirely locally
 
 Multiple devices can connect simultaneously as long as they are on the same network

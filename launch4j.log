@@ -1,0 +1,667 @@
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\S
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+cripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\S
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.001
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+JRE paths:	;C:\ffmpeg\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\;C:\Users\sgres\AppData\Local\Programs\Python\Python314\;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\php-8.5.1;C:\ffmpeg;C:\Program Files\nodejs\;C:\ProgramData\chocolatey\bin;C:\Users\sgres\AppData\Local\Python\bin;C:\Users\sgres\AppData\Local\Microsoft\WindowsApps;C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin;C:\php-8.5.1;C:\ffmpeg;C:\Users\sgres\AppData\Roaming\npm;;C:\Program Files\Java\jdk-17\bin
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\system32\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\Windows\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\Scripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+cripts\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Python\Python314\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\nodejs\bin\javaw.exe (not found)
+Check launcher:	C:\ProgramData\chocolatey\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Python\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\OneDrive\Documents\UDHO_APP\flutter\bin\javaw.exe (not found)
+Check launcher:	C:\php-8.5.1\bin\javaw.exe (not found)
+Check launcher:	C:\ffmpeg\bin\javaw.exe (not found)
+Check launcher:	C:\Users\sgres\AppData\Roaming\npm\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe (OK)
+Version string: 1.017.000_012 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-17\bin\javaw.exe
+Launcher args:	-jar "C:\Users\sgres\OneDrive\Documents\queuemaster-pro_enterprise_v3\qmaster.exe"
+Args length:	82/32768 chars
+Exit code:	1
+
+
+Version:	3.50
+CmdLine:	C:\Users\Spencer\Documents\queuemaster-pro_enterprise_v3\queuemaster-pro_enterprise_v3\QueueMasterLauncher.exe --l4j-debug
+JNI:		No
+WOW64:		Yes
+Working dir:	C:\Users\Spencer\Documents\queuemaster-pro_enterprise_v3\queuemaster-pro_enterprise_v3\.
+Requires JDK:	No
+Requires 64-Bit: No
+Java min ver:	1.008.000
+Java max ver:	
+Substitute:	JAVA_HOME = 
+Substitute:	PATH = C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\Spencer\AppData\Local\Microsoft\WindowsApps;C:\Users\Spencer\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Spencer\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Java\jdk-25.0.2\bin
+JRE paths:	;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Git\cmd;C:\Users\Spencer\AppData\Local\Microsoft\WindowsApps;C:\Users\Spencer\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Spencer\AppData\Local\Programs\cursor\resources\app\bin;C:\Program Files\Java\jdk-25.0.2\bin
+Check launcher:	C:\Program Files\Common Files\Oracle\Java\javapath\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\system32\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\Wbem\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\WindowsPowerShell\v1.0\bin\javaw.exe (not found)
+Check launcher:	C:\WINDOWS\System32\OpenSSH\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Git\cmd\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Spencer\AppData\Local\Microsoft\WindowsApps\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Spencer\AppData\Local\Programs\Microsoft VS Code\bin\javaw.exe (not found)
+Check launcher:	C:\Users\Spencer\AppData\Local\Programs\cursor\resources\app\bin\javaw.exe (not found)
+Check launcher:	C:\Program Files\Java\jdk-25.0.2\bin\javaw.exe (OK)
+Version string: 1.025.000_002 / 64-Bit (OK)
+Launcher:	C:\Program Files\Java\jdk-25.0.2\bin\javaw.exe
+Launcher args:	-jar "C:\Users\Spencer\Documents\queuemaster-pro_enterprise_v3\queuemaster-pro_enterprise_v3\QueueMasterLauncher.exe"
+Args length:	117/32768 chars
+Exit code:	0

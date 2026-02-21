@@ -1,0 +1,5 @@
+ttkbootstrap
+requests
+psutil
+qrcode[pil]
+pillow

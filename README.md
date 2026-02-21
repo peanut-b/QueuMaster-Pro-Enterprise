@@ -18,3 +18,10 @@ View your app in AI Studio: https://ai.studio/apps/drive/1HBiZdeV2Q6WbJqyB3RRAvM
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## Java Launcher (optional)
+
+A desktop launcher is provided so you can start the app without using the terminal.
+
+- **Run from JAR:** Install a JDK, then: `java -jar QueueMasterLauncher.jar`
+- **Build EXE:** From the project folder run `build-exe.bat`. This compiles the Java launcher, creates `QueueMasterLauncher.jar`, and (if [Launch4j](https://launch4j.sourceforge.net/) is installed) produces `QueueMaster.exe`. Place and run the exe in this project folder so it can find `package.json` and run `npm run dev`.

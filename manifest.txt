@@ -1,0 +1,2 @@
+Main-Class: QueueMasterLauncher 
+Class-Path: lib/core-3.5.1.jar lib/javase-3.5.1.jar 

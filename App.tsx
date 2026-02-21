@@ -15,6 +15,9 @@ import {
   ArrowLeft,
   Eye,
   EyeOff,
+  CloudOff,
+  Cloud,
+  HardDrive,
   Wifi,
   WifiOff
 } from 'lucide-react';
@@ -26,83 +29,237 @@ import MonitorDisplay from './pages/MonitorDisplay';
 import { realtimeService } from './services/RealtimeService';
 import { broadcastAnnouncement } from './services/geminiService';
 
+// Enhanced localStorage service with offline queue
+class LocalStorageService {
+  private readonly STORAGE_KEYS = {
+    TICKETS: 'q_tickets',
+    CATEGORIES: 'q_categories',
+    TELLERS: 'q_tellers',
+    ADMIN_ACCOUNTS: 'q_admin_accounts',
+    CATEGORY_COUNTERS: 'q_category_counters',
+    DAILY_RESET_TIME: 'q_daily_reset_time',
+    LAST_ISSUED_TICKET: 'q_last_issued_ticket',
+    ACTIVE_TELLER_ID: 'q_active_teller_id',
+    PENDING_CHANGES: 'q_pending_changes',
+    LAST_SYNC: 'q_last_sync',
+    AUTH_STATE: 'q_auth_state'
+  };
+
+  // Save data with timestamp
+  saveData(key: string, data: any): void {
+    try {
+      const saveObject = {
+        data,
+        timestamp: Date.now(),
+        version: '3.1.0'
+      };
+      localStorage.setItem(key, JSON.stringify(saveObject));
+      console.log(`💾 Saved: ${key}`, data);
+    } catch (error) {
+      console.error(`❌ Error saving to localStorage (${key}):`, error);
+    }
+  }
+
+  // Load data with error handling
+  loadData<T>(key: string, defaultValue: T): T {
+    try {
+      const saved = localStorage.getItem(key);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        const data = parsed.data !== undefined ? parsed.data : parsed;
+        console.log(`📂 Loaded: ${key}`, data);
+        return data;
+      }
+    } catch (error) {
+      console.error(`❌ Error loading from localStorage (${key}):`, error);
+    }
+    return defaultValue;
+  }
+
+  // Queue pending changes when offline
+  queuePendingChange(type: string, payload: any): void {
+    const pendingKey = this.STORAGE_KEYS.PENDING_CHANGES;
+    try {
+      const pending = this.loadData<any[]>(pendingKey, []);
+      pending.push({
+        id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
+        type,
+        payload,
+        timestamp: Date.now(),
+        retryCount: 0
+      });
+      this.saveData(pendingKey, pending);
+      console.log(`📦 Queued: ${type}`);
+    } catch (error) {
+      console.error('Error queueing pending change:', error);
+    }
+  }
+
+  getPendingChanges(): any[] {
+    return this.loadData<any[]>(this.STORAGE_KEYS.PENDING_CHANGES, []);
+  }
+
+  clearPendingChanges(): void {
+    this.saveData(this.STORAGE_KEYS.PENDING_CHANGES, []);
+  }
+
+  removePendingChange(changeId: string): void {
+    const pending = this.getPendingChanges();
+    const filtered = pending.filter(c => c.id !== changeId);
+    this.saveData(this.STORAGE_KEYS.PENDING_CHANGES, filtered);
+  }
+
+  hasPendingChanges(): boolean {
+    return this.getPendingChanges().length > 0;
+  }
+
+  getLastSyncTime(): number | null {
+    return this.loadData<number | null>(this.STORAGE_KEYS.LAST_SYNC, null);
+  }
+
+  updateLastSyncTime(): void {
+    this.saveData(this.STORAGE_KEYS.LAST_SYNC, Date.now());
+  }
+
+  // Save auth state
+  saveAuthState(role: Role | null, adminAuth: boolean, tellerAuth: boolean, adminId: string | null, tellerId: string): void {
+    this.saveData(this.STORAGE_KEYS.AUTH_STATE, {
+      currentRole: role,
+      isAdminAuthenticated: adminAuth,
+      isTellerAuthenticated: tellerAuth,
+      authenticatedAdminId: adminId,
+      activeTellerId: tellerId,
+      timestamp: Date.now()
+    });
+  }
+
+  loadAuthState(): any {
+    return this.loadData(this.STORAGE_KEYS.AUTH_STATE, {
+      currentRole: null,
+      isAdminAuthenticated: false,
+      isTellerAuthenticated: false,
+      authenticatedAdminId: null,
+      activeTellerId: ''
+    });
+  }
+
+  // Clear all app data
+  clearAllData(): void {
+    Object.values(this.STORAGE_KEYS).forEach(key => {
+      localStorage.removeItem(key);
+    });
+  }
+}
+
+const localStorageService = new LocalStorageService();
+
 // Register service worker for offline support
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('/service-worker.js')
     .then(registration => {
-      console.log('ServiceWorker registration successful');
+      console.log('✅ ServiceWorker registered');
     })
     .catch(err => {
-      console.log('ServiceWorker registration failed: ', err);
+      console.log('❌ ServiceWorker failed: ', err);
     });
 }
 
 const App: React.FC = () => {
-  const [currentRole, setCurrentRole] = useState<Role | null>(null);
-  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(false);
-  const [isTellerAuthenticated, setIsTellerAuthenticated] = useState(false);
+  // Load auth state from localStorage
+  const savedAuth = localStorageService.loadAuthState();
+  
+  const [currentRole, setCurrentRole] = useState<Role | null>(savedAuth.currentRole || null);
+  const [isAdminAuthenticated, setIsAdminAuthenticated] = useState(savedAuth.isAdminAuthenticated || false);
+  const [isTellerAuthenticated, setIsTellerAuthenticated] = useState(savedAuth.isTellerAuthenticated || false);
   const [authenticatedAdmin, setAuthenticatedAdmin] = useState<AdminAccount | null>(null);
   const [showForgotPass, setShowForgotPass] = useState(false);
   const [isAdminRegistering, setIsAdminRegistering] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [connectionStatus, setConnectionStatus] = useState<string>('disconnected');
+  const [connectionStatus, setConnectionStatus] = useState<string>('connecting');
   const [clientCount, setClientCount] = useState<number>(0);
   const [lastIssuedTicket, setLastIssuedTicket] = useState<Ticket | null>(null);
-  const [isPageVisible, setIsPageVisible] = useState(true);
+  const [connectionError, setConnectionError] = useState<string | null>(null);
+  const [pendingChangesCount, setPendingChangesCount] = useState<number>(0);
+  const [isSyncing, setIsSyncing] = useState<boolean>(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
+  const [offlineMode, setOfflineMode] = useState<boolean>(false);
   
   const [loginEmail, setLoginEmail] = useState('');
   const [loginPass, setLoginPass] = useState('');
   const [regName, setRegName] = useState('');
   
-  const [tickets, setTickets] = useState<Ticket[]>([]);
+  // ============================================
+  // NO DEFAULT DATA - EVERYTHING STARTS EMPTY
+  // Only load from localStorage, never create defaults
+  // ============================================
   
-  // Daily reset tracker
+  // Tickets - start empty
+  const [tickets, setTickets] = useState<Ticket[]>(() => {
+    return localStorageService.loadData<Ticket[]>('q_tickets', []);
+  });
+  
+  // Daily reset time - start with current time
   const [dailyResetTime, setDailyResetTime] = useState<number>(() => {
-    const saved = localStorage.getItem('q_daily_reset_time');
-    return saved ? parseInt(saved) : Date.now();
+    return localStorageService.loadData<number>('q_daily_reset_time', Date.now());
   });
   
-  // Track ticket numbers per category for daily reset
+  // Category counters - start empty
   const [categoryCounters, setCategoryCounters] = useState<Record<string, number>>(() => {
-    const saved = localStorage.getItem('q_category_counters');
-    return saved ? JSON.parse(saved) : {};
+    return localStorageService.loadData<Record<string, number>>('q_category_counters', {});
   });
 
-  // Initialize with empty arrays - data will come from WebSocket server
-  const [adminAccounts, setAdminAccounts] = useState<AdminAccount[]>([
-    { 
-      id: 'admin-1', 
-      email: 'admin@queuemaster.com', 
-      password: 'admin123', 
-      name: 'System Admin',
-      createdAt: Date.now() 
+  // Admin accounts - ONLY load from localStorage, NO default admin
+  const [adminAccounts, setAdminAccounts] = useState<AdminAccount[]>(() => {
+    const saved = localStorageService.loadData<AdminAccount[]>('q_admin_accounts', []);
+    // NO DEFAULT ADMIN - start with empty array if no data
+    return saved;
+  });
+
+  // Categories - ONLY load from localStorage, NO default categories
+  const [categories, setCategories] = useState<ServiceCategory[]>(() => {
+    const saved = localStorageService.loadData<ServiceCategory[]>('q_categories', []);
+    // NO DEFAULT CATEGORIES - start with empty array if no data
+    return saved;
+  });
+
+  // Tellers - ONLY load from localStorage, NO default tellers
+  const [tellers, setTellers] = useState<Teller[]>(() => {
+    const saved = localStorageService.loadData<Teller[]>('q_tellers', []);
+    // NO DEFAULT TELLERS - start with empty array if no data
+    return saved;
+  });
+
+  // Active teller - load from localStorage
+  const [activeTellerId, setActiveTellerId] = useState<string>(() => {
+    return localStorageService.loadData<string>('q_active_teller_id', savedAuth.activeTellerId || '');
+  });
+
+  // Find authenticated admin from saved ID
+  useEffect(() => {
+    if (savedAuth.authenticatedAdminId && adminAccounts.length > 0) {
+      const admin = adminAccounts.find(a => a.id === savedAuth.authenticatedAdminId);
+      if (admin) {
+        setAuthenticatedAdmin(admin);
+      }
     }
-  ]);
+  }, [adminAccounts]);
 
-  const [categories, setCategories] = useState<ServiceCategory[]>([
-    { id: 'c1', name: 'General Inquiries', prefix: 'G', color: 'blue', estimatedTime: 5 },
-    { id: 'c2', name: 'Cash Deposits', prefix: 'D', color: 'green', estimatedTime: 10 },
-    { id: 'c3', name: 'Account Opening', prefix: 'A', color: 'purple', estimatedTime: 20 },
-    { id: 'c4', name: 'Technical Support', prefix: 'T', color: 'orange', estimatedTime: 15 },
-    { id: 'c5', name: 'Corporate Services', prefix: 'C', color: 'indigo', estimatedTime: 25 },
-  ]);
-
-  const [tellers, setTellers] = useState<Teller[]>(Array.from({ length: 5 }, (_, i) => ({
-    id: `teller-${i + 1}`,
-    name: `Teller ${i + 1}`,
-    counterNumber: i + 1,
-    status: 'ONLINE',
-    assignedCategoryIds: ['c1', 'c2', 'c3', 'c4', 'c5']
-  })).slice(0, 10));
-
-  const [activeTellerId, setActiveTellerId] = useState<string>('');
+  // Load last issued ticket from localStorage
+  useEffect(() => {
+    const savedLastTicket = localStorageService.loadData<Ticket | null>('q_last_issued_ticket', null);
+    if (savedLastTicket) {
+      setLastIssuedTicket(savedLastTicket);
+    }
+    setIsInitialLoad(false);
+  }, []);
   
-  // Refs for keeping stable references
+  // Refs
   const connectionStatusRef = useRef(connectionStatus);
   const ticketsRef = useRef(tickets);
   const categoriesRef = useRef(categories);
   const categoryCountersRef = useRef(categoryCounters);
   const lastIssuedTicketRef = useRef(lastIssuedTicket);
+  const offlineModeRef = useRef(offlineMode);
 
   // Update refs when state changes
   useEffect(() => {
@@ -111,38 +268,96 @@ const App: React.FC = () => {
     categoriesRef.current = categories;
     categoryCountersRef.current = categoryCounters;
     lastIssuedTicketRef.current = lastIssuedTicket;
-  }, [connectionStatus, tickets, categories, categoryCounters, lastIssuedTicket]);
+    offlineModeRef.current = offlineMode;
+  }, [connectionStatus, tickets, categories, categoryCounters, lastIssuedTicket, offlineMode]);
 
-  // Page visibility detection for keeping connection alive
+  // Save auth state
   useEffect(() => {
-    const handleVisibilityChange = () => {
-      setIsPageVisible(!document.hidden);
-      if (!document.hidden && connectionStatusRef.current === 'disconnected') {
-        // Reconnect if page becomes visible and was disconnected
-        realtimeService.reconnect();
-      }
+    if (!isInitialLoad) {
+      localStorageService.saveAuthState(
+        currentRole,
+        isAdminAuthenticated,
+        isTellerAuthenticated,
+        authenticatedAdmin?.id || null,
+        activeTellerId
+      );
+    }
+  }, [currentRole, isAdminAuthenticated, isTellerAuthenticated, authenticatedAdmin, activeTellerId]);
+
+  // AUTO-SAVE: Save to localStorage whenever ANY state changes
+  useEffect(() => {
+    if (!isInitialLoad) {
+      const timeoutId = setTimeout(() => {
+        localStorageService.saveData('q_tickets', tickets);
+      }, 300);
+      return () => clearTimeout(timeoutId);
+    }
+  }, [tickets]);
+
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorageService.saveData('q_categories', categories);
+    }
+  }, [categories]);
+
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorageService.saveData('q_tellers', tellers);
+    }
+  }, [tellers]);
+
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorageService.saveData('q_admin_accounts', adminAccounts);
+    }
+  }, [adminAccounts]);
+
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorageService.saveData('q_category_counters', categoryCounters);
+    }
+  }, [categoryCounters]);
+
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorageService.saveData('q_daily_reset_time', dailyResetTime);
+    }
+  }, [dailyResetTime]);
+
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorageService.saveData('q_last_issued_ticket', lastIssuedTicket);
+    }
+  }, [lastIssuedTicket]);
+
+  useEffect(() => {
+    if (!isInitialLoad) {
+      localStorageService.saveData('q_active_teller_id', activeTellerId);
+    }
+  }, [activeTellerId]);
+
+  // Update pending changes count
+  useEffect(() => {
+    const updatePendingCount = () => {
+      setPendingChangesCount(localStorageService.getPendingChanges().length);
     };
-
-    // Heartbeat to keep connection alive when page is not visible
-    const heartbeatInterval = setInterval(() => {
-      if (realtimeService.isConnected()) {
-        // Send heartbeat to keep connection alive
-        realtimeService.send({
-          type: 'heartbeat',
-          timestamp: Date.now()
-        });
-      }
-    }, 30000); // Send heartbeat every 30 seconds
-
-    document.addEventListener('visibilitychange', handleVisibilityChange);
     
-    return () => {
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      clearInterval(heartbeatInterval);
-    };
+    updatePendingCount();
+    const interval = setInterval(updatePendingCount, 2000);
+    
+    return () => clearInterval(interval);
   }, []);
 
-  // Check for daily reset every hour
+  // Page visibility detection
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      // Don't auto-reconnect, just update visibility
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => document.removeEventListener('visibilitychange', handleVisibilityChange);
+  }, []);
+
+  // Check for daily reset
   useEffect(() => {
     const checkDailyReset = () => {
       const now = Date.now();
@@ -152,96 +367,156 @@ const App: React.FC = () => {
         performDailyReset();
       }
     };
-
-    // Check every hour
     const resetCheckInterval = setInterval(checkDailyReset, 60 * 60 * 1000);
-    
-    // Initial check
     checkDailyReset();
-    
     return () => clearInterval(resetCheckInterval);
   }, [dailyResetTime]);
 
-  // Perform daily reset of ticket numbers
-  const performDailyReset = () => {
-    console.log('Performing daily reset of ticket numbers');
+  // Sync pending changes - MANUAL ONLY
+  const syncPendingChanges = async () => {
+    if (!realtimeService.isConnected()) {
+      alert('⚠️ Cannot sync: You are offline. Please check your connection and try again.');
+      return;
+    }
     
-    // Reset category counters
-    const resetCounters: Record<string, number> = {};
-    categoriesRef.current.forEach(cat => {
-      resetCounters[cat.id] = 0;
-    });
+    const pendingChanges = localStorageService.getPendingChanges();
+    if (pendingChanges.length === 0) {
+      alert('✅ No pending changes to sync.');
+      return;
+    }
     
-    setCategoryCounters(resetCounters);
-    localStorage.setItem('q_category_counters', JSON.stringify(resetCounters));
+    setIsSyncing(true);
+    console.log(`🔄 Syncing ${pendingChanges.length} pending changes...`);
     
-    // Update daily reset time
-    const newResetTime = Date.now();
-    setDailyResetTime(newResetTime);
-    localStorage.setItem('q_daily_reset_time', newResetTime.toString());
+    let successCount = 0;
+    let failCount = 0;
     
-    // Clear only waiting tickets (keep in-progress tickets)
-    setTickets(prev => {
-      const filteredTickets = prev.filter(ticket => 
-        ticket.status === TicketStatus.CALLING || 
-        ticket.status === TicketStatus.SERVING
-      );
-      
-      // Broadcast the reset to other clients
-      realtimeService.send({
-        type: 'daily_reset',
-        resetTime: newResetTime,
-        tickets: filteredTickets
-      });
-      
-      return filteredTickets;
-    });
+    for (const change of pendingChanges) {
+      try {
+        switch (change.type) {
+          case 'ticket_update':
+            realtimeService.send({
+              type: 'ticket_update',
+              ticket: { ...change.payload, lastUpdated: Date.now() }
+            });
+            break;
+          case 'teller_update':
+            realtimeService.send({
+              type: 'teller_update',
+              teller: { ...change.payload, lastUpdated: Date.now() }
+            });
+            break;
+          case 'category_update':
+            realtimeService.send({
+              type: 'category_update',
+              category: change.payload
+            });
+            break;
+          case 'admin_account_update':
+            realtimeService.send({
+              type: 'admin_account_update',
+              account: change.payload
+            });
+            break;
+          case 'counter_update':
+            realtimeService.send({
+              type: 'counter_update',
+              categoryId: change.payload.categoryId,
+              count: change.payload.count
+            });
+            break;
+          case 'daily_reset':
+            realtimeService.send({
+              type: 'daily_reset',
+              resetTime: change.payload.resetTime,
+              categoryCounters: change.payload.categoryCounters,
+              tickets: change.payload.tickets
+            });
+            break;
+        }
+        
+        localStorageService.removePendingChange(change.id);
+        successCount++;
+        await new Promise(resolve => setTimeout(resolve, 50));
+      } catch (error) {
+        console.error(`❌ Failed to sync change ${change.id}:`, error);
+        failCount++;
+      }
+    }
     
-    // Notify all connected clients
-    broadcastAnnouncement("System Note: Daily ticket numbers have been reset.", 0);
+    setIsSyncing(false);
+    setPendingChangesCount(localStorageService.getPendingChanges().length);
+    localStorageService.updateLastSyncTime();
+    
+    alert(`✅ Sync complete! ${successCount} changes synced, ${failCount} failed.`);
   };
 
-  // Initialize realtime service listeners
+  // Initialize realtime service
   useEffect(() => {
-    realtimeService.on('connected', () => {
+    setConnectionStatus('connecting');
+
+    const handleConnected = () => {
+      console.log('🔗 Connected to server');
       setConnectionStatus('connected');
-      // Request full sync when connected
-      realtimeService.requestSync();
-    });
+      setConnectionError(null);
+      setOfflineMode(false);
+    };
 
-    realtimeService.on('disconnected', () => {
+    const handleDisconnected = () => {
+      console.log('🔌 Disconnected from server');
       setConnectionStatus('disconnected');
-    });
+      setOfflineMode(true);
+    };
 
-    realtimeService.on('welcome', (data: any) => {
+    const handleConnecting = () => {
+      console.log('⏳ Connecting to server...');
+      setConnectionStatus('connecting');
+    };
+
+    const handleWelcome = (data: any) => {
       setClientCount(data.clientCount || 0);
-    });
+    };
 
-    realtimeService.on('ticket_update', (ticket: Ticket) => {
+    const handleTicketUpdate = (ticket: Ticket) => {
       setTickets(prev => {
         const exists = prev.find(t => t.id === ticket.id);
         if (exists) {
-          return prev.map(t => t.id === ticket.id ? { ...ticket, lastUpdated: Date.now() } : t);
+          if (ticket.lastUpdated && exists.lastUpdated && ticket.lastUpdated > exists.lastUpdated) {
+            return prev.map(t => t.id === ticket.id ? { ...ticket, lastUpdated: Date.now() } : t);
+          }
+          return prev;
         } else {
           return [...prev, { ...ticket, lastUpdated: Date.now() }];
         }
       });
-      
-      // Update last issued ticket if it's a new ticket
-      if (!exists && ticket.status === TicketStatus.WAITING) {
-        setLastIssuedTicket(ticket);
-      }
-    });
+    };
 
-    realtimeService.on('teller_update', (teller: Teller) => {
-      setTellers(prev => prev.map(t => t.id === teller.id ? teller : t));
-    });
+    const handleTellerUpdate = (teller: Teller) => {
+      setTellers(prev => {
+        const exists = prev.find(t => t.id === teller.id);
+        if (exists) {
+          if (teller.lastUpdated && exists.lastUpdated && teller.lastUpdated > exists.lastUpdated) {
+            return prev.map(t => t.id === teller.id ? teller : t);
+          }
+          return prev;
+        } else {
+          return [...prev, teller];
+        }
+      });
+    };
 
-    realtimeService.on('category_update', (category: ServiceCategory) => {
-      setCategories(prev => prev.map(c => c.id === category.id ? category : c));
-    });
+    const handleCategoryUpdate = (category: ServiceCategory) => {
+      setCategories(prev => {
+        const exists = prev.find(c => c.id === category.id);
+        if (exists) {
+          return prev.map(c => c.id === category.id ? category : c);
+        } else {
+          return [...prev, category];
+        }
+      });
+    };
 
-    realtimeService.on('admin_account_update', (account: AdminAccount) => {
+    const handleAdminAccountUpdate = (account: AdminAccount) => {
       setAdminAccounts(prev => {
         const exists = prev.find(a => a.id === account.id);
         if (exists) {
@@ -250,177 +525,237 @@ const App: React.FC = () => {
           return [...prev, account];
         }
       });
-    });
+    };
 
-    realtimeService.on('sync', (data: any) => {
+    const handleSync = (data: any) => {
+      console.log('🔄 Received sync from server');
+      
       if (data.tickets && Array.isArray(data.tickets)) {
-        setTickets(data.tickets.map((t: Ticket) => ({ ...t, lastUpdated: t.lastUpdated || Date.now() })));
-      }
-      if (data.categories && Array.isArray(data.categories)) {
-        setCategories(data.categories);
-      }
-      if (data.tellers && Array.isArray(data.tellers)) {
-        setTellers(data.tellers);
-      }
-      if (data.adminAccounts && Array.isArray(data.adminAccounts)) {
-        setAdminAccounts(data.adminAccounts);
-      }
-      if (data.dailyResetTime) {
-        setDailyResetTime(data.dailyResetTime);
-      }
-      if (data.categoryCounters) {
-        setCategoryCounters(data.categoryCounters);
-      }
-    });
-
-    realtimeService.on('announce', (data: any) => {
-      console.log('Remote announcement:', data);
-    });
-
-    realtimeService.on('connection_failed', (data: any) => {
-      console.log('Connection failed after attempts:', data.attempts);
-      setConnectionStatus('disconnected');
-    });
-
-    realtimeService.on('heartbeat', (data: any) => {
-      // Acknowledge heartbeat
-      if (realtimeService.isConnected()) {
-        realtimeService.send({
-          type: 'heartbeat_ack',
-          timestamp: data.timestamp
+        setTickets(prev => {
+          const ticketMap = new Map(prev.map(t => [t.id, t]));
+          data.tickets.forEach((serverTicket: Ticket) => {
+            const localTicket = ticketMap.get(serverTicket.id);
+            if (localTicket) {
+              const localTime = localTicket.lastUpdated || 0;
+              const serverTime = serverTicket.lastUpdated || 0;
+              if (serverTime > localTime) {
+                ticketMap.set(serverTicket.id, { ...serverTicket, lastUpdated: Date.now() });
+              }
+            } else {
+              ticketMap.set(serverTicket.id, { ...serverTicket, lastUpdated: serverTicket.lastUpdated || Date.now() });
+            }
+          });
+          return Array.from(ticketMap.values());
         });
       }
-    });
+      
+      if (data.categories && Array.isArray(data.categories)) {
+        setCategories(prev => {
+          const categoryMap = new Map(prev.map(c => [c.id, c]));
+          data.categories.forEach((serverCategory: ServiceCategory) => {
+            categoryMap.set(serverCategory.id, serverCategory);
+          });
+          return Array.from(categoryMap.values());
+        });
+      }
+      
+      if (data.tellers && Array.isArray(data.tellers)) {
+        setTellers(prev => {
+          const tellerMap = new Map(prev.map(t => [t.id, t]));
+          data.tellers.forEach((serverTeller: Teller) => {
+            const localTeller = tellerMap.get(serverTeller.id);
+            if (localTeller) {
+              const localTime = localTeller.lastUpdated || 0;
+              const serverTime = serverTeller.lastUpdated || 0;
+              if (serverTime > localTime) {
+                tellerMap.set(serverTeller.id, serverTeller);
+              }
+            } else {
+              tellerMap.set(serverTeller.id, serverTeller);
+            }
+          });
+          return Array.from(tellerMap.values());
+        });
+      }
+      
+      if (data.adminAccounts && Array.isArray(data.adminAccounts)) {
+        setAdminAccounts(prev => {
+          const accountMap = new Map(prev.map(a => [a.id, a]));
+          data.adminAccounts.forEach((serverAccount: AdminAccount) => {
+            accountMap.set(serverAccount.id, serverAccount);
+          });
+          return Array.from(accountMap.values());
+        });
+      }
+      
+      if (data.dailyResetTime) {
+        setDailyResetTime(prev => data.dailyResetTime > prev ? data.dailyResetTime : prev);
+      }
+      
+      if (data.categoryCounters) {
+        setCategoryCounters(prev => {
+          const merged = { ...prev };
+          Object.entries(data.categoryCounters).forEach(([key, value]) => {
+            if (!merged[key] || (value as number) > merged[key]) {
+              merged[key] = value as number;
+            }
+          });
+          return merged;
+        });
+      }
+      
+      localStorageService.updateLastSyncTime();
+    };
 
-    realtimeService.on('daily_reset', (data: any) => {
-      console.log('Received daily reset from server');
+    const handleDailyReset = (data: any) => {
       setDailyResetTime(data.resetTime || Date.now());
       setCategoryCounters(data.categoryCounters || {});
       setTickets(data.tickets || []);
-    });
+    };
 
-    // Connect to WebSocket server with auto-reconnect
+    const handleConnectionFailed = (data: any) => {
+      console.log('❌ Connection failed:', data);
+      setConnectionStatus('disconnected');
+      setOfflineMode(true);
+      setConnectionError(data.error || 'Failed to connect to server');
+    };
+
+    realtimeService.on('connected', handleConnected);
+    realtimeService.on('disconnected', handleDisconnected);
+    realtimeService.on('connecting', handleConnecting);
+    realtimeService.on('welcome', handleWelcome);
+    realtimeService.on('ticket_update', handleTicketUpdate);
+    realtimeService.on('teller_update', handleTellerUpdate);
+    realtimeService.on('category_update', handleCategoryUpdate);
+    realtimeService.on('admin_account_update', handleAdminAccountUpdate);
+    realtimeService.on('sync', handleSync);
+    realtimeService.on('daily_reset', handleDailyReset);
+    realtimeService.on('connection_failed', handleConnectionFailed);
+
     realtimeService.connect();
 
-    // Auto-reconnect when connection drops
-    const autoReconnectInterval = setInterval(() => {
-      if (!realtimeService.isConnected() && isPageVisible) {
-        realtimeService.reconnect();
-      }
-    }, 5000);
-
     return () => {
-      clearInterval(autoReconnectInterval);
+      realtimeService.off('connected', handleConnected);
+      realtimeService.off('disconnected', handleDisconnected);
+      realtimeService.off('connecting', handleConnecting);
+      realtimeService.off('welcome', handleWelcome);
+      realtimeService.off('ticket_update', handleTicketUpdate);
+      realtimeService.off('teller_update', handleTellerUpdate);
+      realtimeService.off('category_update', handleCategoryUpdate);
+      realtimeService.off('admin_account_update', handleAdminAccountUpdate);
+      realtimeService.off('sync', handleSync);
+      realtimeService.off('daily_reset', handleDailyReset);
+      realtimeService.off('connection_failed', handleConnectionFailed);
+      
       realtimeService.disconnect();
     };
   }, []);
 
-  // Update connection status periodically
+  // Update connection status
   useEffect(() => {
     const interval = setInterval(() => {
       const status = realtimeService.getConnectionStatus();
       setConnectionStatus(status);
-      
-      // If disconnected and page is visible, try to reconnect
-      if (status === 'disconnected' && isPageVisible) {
-        realtimeService.reconnect();
-      }
+      setOfflineMode(status !== 'connected');
     }, 2000);
-
     return () => clearInterval(interval);
-  }, [isPageVisible]);
+  }, []);
 
-  // Keep localStorage as backup only (not primary source)
-  useEffect(() => {
-    localStorage.setItem('q_tickets_backup', JSON.stringify(tickets));
-  }, [tickets]);
-
-  useEffect(() => {
-    localStorage.setItem('q_categories_backup', JSON.stringify(categories));
-  }, [categories]);
-
-  useEffect(() => {
-    localStorage.setItem('q_tellers_backup', JSON.stringify(tellers.slice(0, 10)));
-  }, [tellers]);
-
-  useEffect(() => {
-    localStorage.setItem('q_admin_accounts_backup', JSON.stringify(adminAccounts));
-  }, [adminAccounts]);
-
-  // Save category counters
-  useEffect(() => {
-    localStorage.setItem('q_category_counters', JSON.stringify(categoryCounters));
-  }, [categoryCounters]);
-
-  // Save daily reset time
-  useEffect(() => {
-    localStorage.setItem('q_daily_reset_time', dailyResetTime.toString());
-  }, [dailyResetTime]);
-
-  // Broadcast changes to all connected clients via WebSocket
+  // Broadcast functions - queue when offline
   const broadcastTicketUpdate = (ticket: Ticket) => {
-    realtimeService.send({
-      type: 'ticket_update',
-      ticket: { ...ticket, lastUpdated: Date.now() }
-    });
+    if (realtimeService.isConnected()) {
+      realtimeService.send({
+        type: 'ticket_update',
+        ticket: { ...ticket, lastUpdated: Date.now() }
+      });
+    } else {
+      localStorageService.queuePendingChange('ticket_update', ticket);
+    }
   };
 
   const broadcastTellerUpdate = (teller: Teller) => {
-    realtimeService.send({
-      type: 'teller_update',
-      teller: teller
-    });
+    if (realtimeService.isConnected()) {
+      realtimeService.send({
+        type: 'teller_update',
+        teller: { ...teller, lastUpdated: Date.now() }
+      });
+    } else {
+      localStorageService.queuePendingChange('teller_update', teller);
+    }
   };
 
   const broadcastCategoryUpdate = (category: ServiceCategory) => {
-    realtimeService.send({
-      type: 'category_update',
-      category: category
-    });
+    if (realtimeService.isConnected()) {
+      realtimeService.send({
+        type: 'category_update',
+        category: category
+      });
+    } else {
+      localStorageService.queuePendingChange('category_update', category);
+    }
   };
 
   const broadcastAdminAccountUpdate = (account: AdminAccount) => {
-    realtimeService.send({
-      type: 'admin_account_update',
-      account: account
-    });
-  };
-
-  const broadcastDailyReset = () => {
-    realtimeService.send({
-      type: 'daily_reset',
-      resetTime: dailyResetTime,
-      categoryCounters: categoryCounters
-    });
-  };
-
-  const handleSystemReset = () => {
-    if (confirm("WARNING: This will permanently delete all tickets, categories, and accounts from this browser. Continue?")) {
-      localStorage.clear();
-      // Clear local state
-      setTickets([]);
-      setCategories([]);
-      setTellers([]);
-      setAdminAccounts([{
-        id: 'admin-1', 
-        email: 'admin@queuemaster.com', 
-        password: 'admin123', 
-        name: 'System Admin',
-        createdAt: Date.now() 
-      }]);
-      setLastIssuedTicket(null);
-      
-      // Reset daily counters
-      const resetCounters: Record<string, number> = {};
-      categories.forEach(cat => {
-        resetCounters[cat.id] = 0;
+    if (realtimeService.isConnected()) {
+      realtimeService.send({
+        type: 'admin_account_update',
+        account: account
       });
-      setCategoryCounters(resetCounters);
-      const newResetTime = Date.now();
-      setDailyResetTime(newResetTime);
-      
-      alert("Local data cleared. Note: This only affects this browser. Other devices may still have data.");
+    } else {
+      localStorageService.queuePendingChange('admin_account_update', account);
     }
+  };
+
+  const broadcastCounterUpdate = (categoryId: string, count: number) => {
+    if (realtimeService.isConnected()) {
+      realtimeService.send({
+        type: 'counter_update',
+        categoryId,
+        count
+      });
+    } else {
+      localStorageService.queuePendingChange('counter_update', { categoryId, count });
+    }
+  };
+
+  const broadcastDailyReset = (resetTime: number, counters: Record<string, number>, tickets: Ticket[]) => {
+    if (realtimeService.isConnected()) {
+      realtimeService.send({
+        type: 'daily_reset',
+        resetTime,
+        categoryCounters: counters,
+        tickets
+      });
+    } else {
+      localStorageService.queuePendingChange('daily_reset', { resetTime, categoryCounters: counters, tickets });
+    }
+  };
+
+  const performDailyReset = () => {
+    console.log('🔄 Performing daily reset of ticket numbers');
+    
+    const resetCounters: Record<string, number> = {};
+    categoriesRef.current.forEach(cat => {
+      resetCounters[cat.id] = 0;
+    });
+    
+    setCategoryCounters(resetCounters);
+    
+    const newResetTime = Date.now();
+    setDailyResetTime(newResetTime);
+    
+    setTickets(prev => {
+      const filteredTickets = prev.filter(ticket => 
+        ticket.status === TicketStatus.CALLING || 
+        ticket.status === TicketStatus.SERVING
+      );
+      
+      broadcastDailyReset(newResetTime, resetCounters, filteredTickets);
+      
+      return filteredTickets;
+    });
+    
+    broadcastAnnouncement("System Note: Daily ticket numbers have been reset.", 0);
   };
 
   // Auth Handlers
@@ -430,8 +765,9 @@ const App: React.FC = () => {
     if (account) {
       setAuthenticatedAdmin(account);
       setIsAdminAuthenticated(true);
+      setCurrentRole(Role.ADMIN);
     } else {
-      alert('Invalid credentials. Check your email and password.');
+      alert('❌ Invalid credentials. Check your email and password.');
     }
   };
 
@@ -439,7 +775,7 @@ const App: React.FC = () => {
     e.preventDefault();
     if (!loginEmail || !loginPass || !regName) return;
     if (adminAccounts.find(a => a.email === loginEmail)) {
-      alert("Email already exists.");
+      alert("❌ Email already exists.");
       return;
     }
     const newAcc: AdminAccount = {
@@ -452,7 +788,7 @@ const App: React.FC = () => {
     setAdminAccounts(prev => [...prev, newAcc]);
     broadcastAdminAccountUpdate(newAcc);
     setIsAdminRegistering(false);
-    alert("Registration successful! Please login.");
+    alert("✅ Registration successful! Please login.");
   };
 
   const handleLogout = () => {
@@ -470,8 +806,9 @@ const App: React.FC = () => {
   const handleTellerLogin = () => {
     if (activeTellerId) {
       setIsTellerAuthenticated(true);
+      setCurrentRole(Role.TELLER);
     } else {
-      alert("Please select a counter station.");
+      alert("⚠️ Please select a counter station.");
     }
   };
 
@@ -493,7 +830,7 @@ const App: React.FC = () => {
 
   const handleDeleteAdminAccount = (id: string) => {
     if (adminAccounts.length <= 1) {
-      alert("At least one admin account must exist.");
+      alert("⚠️ At least one admin account must exist.");
       return;
     }
     setAdminAccounts(prev => prev.filter(a => a.id !== id));
@@ -505,7 +842,6 @@ const App: React.FC = () => {
     setCategories(prev => [...prev, newCat]);
     broadcastCategoryUpdate(newCat);
     
-    // Initialize counter for new category
     setCategoryCounters(prev => ({
       ...prev,
       [newCat.id]: 0
@@ -524,68 +860,51 @@ const App: React.FC = () => {
       assignedCategoryIds: t.assignedCategoryIds.filter(cid => cid !== id)
     })));
     
-    // Remove counter for deleted category
     setCategoryCounters(prev => {
       const newCounters = { ...prev };
       delete newCounters[id];
       return newCounters;
     });
-    
-    // Update tellers after category deletion
-    tellers.forEach(teller => {
-      if (teller.assignedCategoryIds.includes(id)) {
-        const updatedTeller = {
-          ...teller,
-          assignedCategoryIds: teller.assignedCategoryIds.filter(cid => cid !== id)
-        };
-        broadcastTellerUpdate(updatedTeller);
-      }
-    });
   };
 
-  // Teller Handlers (Strictly 10 limit)
+  // Teller Handlers
   const handleAddTeller = (teller: Omit<Teller, 'id' | 'status' | 'assignedCategoryIds'>) => {
     if (tellers.length >= 10) return;
     const newTeller: Teller = {
       ...teller,
       id: `teller-${Date.now()}`,
       status: 'ONLINE',
-      assignedCategoryIds: (teller as any).assignedCategoryIds || categories.map(c => c.id)
+      assignedCategoryIds: (teller as any).assignedCategoryIds || [],
+      lastUpdated: Date.now()
     };
     setTellers(prev => [...prev, newTeller].slice(0, 10));
     broadcastTellerUpdate(newTeller);
   };
 
   const handleUpdateTeller = (teller: Teller) => {
-    setTellers(prev => prev.map(t => t.id === teller.id ? teller : t));
-    broadcastTellerUpdate(teller);
+    const updatedTeller = { ...teller, lastUpdated: Date.now() };
+    setTellers(prev => prev.map(t => t.id === teller.id ? updatedTeller : t));
+    broadcastTellerUpdate(updatedTeller);
   };
 
   const handleDeleteTeller = (id: string) => {
     setTellers(prev => prev.filter(t => t.id !== id));
   };
 
-  // Generate unique ticket number for each category with daily reset
+  // Generate ticket number
   const generateTicketNumber = (categoryId: string) => {
     const category = categories.find(c => c.id === categoryId);
     if (!category) return 'UNK-001';
     
-    // Get current counter for this category
     const currentCount = categoryCounters[categoryId] || 0;
     const newCount = currentCount + 1;
     
-    // Update counter
     setCategoryCounters(prev => ({
       ...prev,
       [categoryId]: newCount
     }));
     
-    // Broadcast counter update
-    realtimeService.send({
-      type: 'counter_update',
-      categoryId,
-      count: newCount
-    });
+    broadcastCounterUpdate(categoryId, newCount);
     
     return `${category.prefix}-${newCount.toString().padStart(3, '0')}`;
   };
@@ -601,7 +920,6 @@ const App: React.FC = () => {
       status: TicketStatus.WAITING,
       createdAt: Date.now(),
       lastUpdated: Date.now(),
-      // Add daily identifier for tracking
       dailyIdentifier: `${new Date(dailyResetTime).toISOString().split('T')[0]}-${categoryId}`
     };
     
@@ -610,67 +928,59 @@ const App: React.FC = () => {
     broadcastTicketUpdate(newTicket);
   };
 
-  // In your App.tsx, replace the handleCallNext function:
+  const handleCallNext = (tellerId: string) => {
+    const teller = tellers.find(t => t.id === tellerId);
+    if (!teller) return;
 
-const handleCallNext = (tellerId: string) => {
-  const teller = tellers.find(t => t.id === tellerId);
-  if (!teller) return;
+    const eligibleTickets = tickets
+      .filter(t => 
+        t.status === TicketStatus.WAITING && 
+        teller.assignedCategoryIds.includes(t.categoryId)
+      )
+      .sort((a, b) => a.createdAt - b.createdAt);
 
-  // Find the oldest waiting ticket for this teller's assigned categories
-  const eligibleTickets = tickets
-    .filter(t => 
-      t.status === TicketStatus.WAITING && 
-      teller.assignedCategoryIds.includes(t.categoryId)
-    )
-    .sort((a, b) => a.createdAt - b.createdAt); // Oldest first
+    const nextTicket = eligibleTickets[0];
+    if (!nextTicket) return;
 
-  const nextTicket = eligibleTickets[0];
-  if (!nextTicket) return;
+    const otherCallingTickets = tickets.filter(t => 
+      t.status === TicketStatus.CALLING && 
+      t.categoryId === nextTicket.categoryId &&
+      t.id !== nextTicket.id
+    );
 
-  // Mark any other tickets that might be calling from same category as waiting
-  const otherCallingTickets = tickets.filter(t => 
-    t.status === TicketStatus.CALLING && 
-    t.categoryId === nextTicket.categoryId &&
-    t.id !== nextTicket.id
-  );
+    otherCallingTickets.forEach(ticket => {
+      const resetTicket = { 
+        ...ticket, 
+        status: TicketStatus.WAITING,
+        tellerId: undefined,
+        counterNumber: undefined,
+        lastUpdated: Date.now()
+      };
+      broadcastTicketUpdate(resetTicket);
+    });
 
-  // Reset other calling tickets in same category
-  otherCallingTickets.forEach(ticket => {
-    const resetTicket = { 
-      ...ticket, 
-      status: TicketStatus.WAITING,
-      tellerId: undefined,
-      counterNumber: undefined,
+    const updatedTicket = { 
+      ...nextTicket, 
+      status: TicketStatus.CALLING, 
+      tellerId, 
+      calledAt: Date.now(), 
+      counterNumber: teller.counterNumber,
       lastUpdated: Date.now()
     };
-    broadcastTicketUpdate(resetTicket);
-  });
+    
+    setTickets(prev => prev.map(t => 
+      t.id === nextTicket.id ? updatedTicket : 
+      otherCallingTickets.some(ot => ot.id === t.id) ? { ...t, status: TicketStatus.WAITING } : t
+    ));
 
-  const updatedTicket = { 
-    ...nextTicket, 
-    status: TicketStatus.CALLING, 
-    tellerId, 
-    calledAt: Date.now(), 
-    counterNumber: teller.counterNumber,
-    lastUpdated: Date.now()
+    setTellers(prev => prev.map(t => 
+      t.id === tellerId ? { ...t, status: 'BUSY', currentTicketId: nextTicket.id, lastUpdated: Date.now() } : t
+    ));
+
+    broadcastTicketUpdate(updatedTicket);
+    broadcastTellerUpdate({ ...teller, status: 'BUSY', currentTicketId: nextTicket.id, lastUpdated: Date.now() });
+    broadcastAnnouncement(nextTicket.number, teller.counterNumber);
   };
-  
-  setTickets(prev => prev.map(t => 
-    t.id === nextTicket.id ? updatedTicket : 
-    otherCallingTickets.some(ot => ot.id === t.id) ? { ...t, status: TicketStatus.WAITING } : t
-  ));
-
-  setTellers(prev => prev.map(t => 
-    t.id === tellerId ? { ...t, status: 'BUSY', currentTicketId: nextTicket.id } : t
-  ));
-
-  // Broadcast updates
-  broadcastTicketUpdate(updatedTicket);
-  broadcastTellerUpdate({ ...teller, status: 'BUSY', currentTicketId: nextTicket.id });
-  
-  // Broadcast announcement to all clients ONLY ONCE
-  broadcastAnnouncement(nextTicket.number, teller.counterNumber);
-};
 
   const handleUpdateStatus = (ticketId: string, status: TicketStatus) => {
     const now = Date.now();
@@ -688,7 +998,7 @@ const handleCallNext = (tellerId: string) => {
     if (status === TicketStatus.COMPLETED || status === TicketStatus.NOSHOW) {
       setTellers(prev => prev.map(t => {
         if (t.currentTicketId === ticketId) {
-          const updated = { ...t, status: 'ONLINE', currentTicketId: undefined };
+          const updated = { ...t, status: 'ONLINE', currentTicketId: undefined, lastUpdated: Date.now() };
           broadcastTellerUpdate(updated);
           return updated;
         }
@@ -697,34 +1007,83 @@ const handleCallNext = (tellerId: string) => {
     }
   };
 
-  // Manual daily reset function (can be called from admin panel)
   const handleManualDailyReset = () => {
     if (confirm("Reset all ticket numbers for today? This will keep ongoing transactions but reset counters for new tickets.")) {
       performDailyReset();
-      alert("Ticket numbers have been reset for the day.");
+      alert("✅ Ticket numbers have been reset for the day.");
     }
   };
 
-  // Role Selection View
+  const handleManualSync = () => {
+    syncPendingChanges();
+  };
+
+  const handleSystemReset = () => {
+    if (confirm("⚠️ WARNING: This will permanently delete ALL local data from this device. Continue?")) {
+      localStorageService.clearAllData();
+      window.location.reload();
+    }
+  };
+
+  // Role Selection View - ALWAYS show, even when offline
   if (!currentRole) {
     return (
       <div className="min-h-screen bg-slate-100 flex items-center justify-center p-6 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]">
         <div className="max-w-4xl w-full">
-          <div className="text-center mb-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-            <h1 className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">QueueMaster <span className="text-indigo-600 italic">Enterprise</span></h1>
-            <p className="text-slate-600 font-medium text-lg">Next-generation workflow optimization for high-traffic centers</p>
-            <div className="mt-4 flex items-center justify-center gap-3">
+          <div className="text-center mb-12">
+            <h1 className="text-5xl font-black text-slate-900 mb-2 tracking-tighter">
+              QueueMaster <span className="text-indigo-600 italic">Enterprise</span>
+            </h1>
+            <p className="text-slate-600 font-medium text-lg">Offline-First Queue Management System</p>
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-3">
+              {/* Connection Status */}
               <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest ${
                 connectionStatus === 'connected' 
                   ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' 
-                  : 'bg-amber-100 text-amber-700 border border-amber-200'
+                  : connectionStatus === 'connecting'
+                    ? 'bg-blue-100 text-blue-700 border border-blue-200 animate-pulse'
+                    : 'bg-amber-100 text-amber-700 border border-amber-200'
               }`}>
-                {connectionStatus === 'connected' ? <Wifi size={12} /> : <WifiOff size={12} />}
-                {connectionStatus === 'connected' ? `Realtime (${clientCount} users)` : 'Offline Mode'}
+                {connectionStatus === 'connected' && <Wifi size={12} />}
+                {connectionStatus === 'connecting' && <RefreshCw size={12} className="animate-spin" />}
+                {connectionStatus === 'disconnected' && <WifiOff size={12} />}
+                
+                {connectionStatus === 'connected' && `Connected (${clientCount} users)`}
+                {connectionStatus === 'connecting' && 'Connecting...'}
+                {connectionStatus === 'disconnected' && 'Offline Mode'}
               </div>
+              
+              {/* Pending Changes */}
+              {pendingChangesCount > 0 && (
+                <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-blue-100 text-blue-700 border border-blue-200">
+                  <HardDrive size={12} />
+                  {pendingChangesCount} change{pendingChangesCount !== 1 ? 's' : ''} pending sync
+                </div>
+              )}
+              
+              {/* Last Sync */}
+              {localStorageService.getLastSyncTime() && (
+                <div className="text-xs font-bold text-slate-500">
+                  Last sync: {new Date(localStorageService.getLastSyncTime()!).toLocaleTimeString()}
+                </div>
+              )}
+              
+              {/* Next Reset */}
               <div className="text-xs font-bold text-slate-500">
                 Next reset in: {Math.max(0, Math.floor((20 - (Date.now() - dailyResetTime) / (1000 * 60 * 60))))}h
               </div>
+              
+              {/* Manual Sync Button */}
+              {pendingChangesCount > 0 && connectionStatus === 'connected' && (
+                <button 
+                  onClick={handleManualSync}
+                  disabled={isSyncing}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-black uppercase tracking-widest bg-indigo-100 text-indigo-700 border border-indigo-200 hover:bg-indigo-200 transition-colors disabled:opacity-50"
+                >
+                  <RefreshCw size={12} className={isSyncing ? 'animate-spin' : ''} />
+                  Sync Now
+                </button>
+              )}
             </div>
           </div>
           
@@ -736,18 +1095,22 @@ const handleCallNext = (tellerId: string) => {
           </div>
 
           <div className="mt-12 text-center text-slate-400 text-xs font-bold uppercase tracking-[0.2em]">
-            &copy; 2025 QueueMaster Pro &bull; V3.1.0-Persistent
+            &copy; 2025 QueueMaster Pro &bull; Offline-First v3.0
           </div>
         </div>
       </div>
     );
   }
 
+
+
+  
+
   // Teller Login Portal
   if (currentRole === Role.TELLER && !isTellerAuthenticated) {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
-        <div className="max-w-md w-full bg-white rounded-[3rem] shadow-2xl border border-slate-200 overflow-hidden animate-in zoom-in duration-300">
+        <div className="max-w-md w-full bg-white rounded-[3rem] shadow-2xl border border-slate-200 overflow-hidden">
           <div className="bg-amber-500 p-10 text-white text-center">
             <div className="bg-white/20 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 backdrop-blur-md">
               <UserCircle size={32} />
@@ -793,40 +1156,40 @@ const handleCallNext = (tellerId: string) => {
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-emerald-600 rounded-full blur-[120px] animate-pulse [animation-delay:2s]"></div>
         </div>
 
-        <div className="max-w-md w-full relative z-10 animate-in zoom-in duration-300">
+        <div className="max-w-md w-full relative z-10">
           <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2.5rem] p-10 shadow-2xl">
             {showForgotPass ? (
               <div className="space-y-6">
                 <div className="text-center mb-8">
-                   <div className="bg-indigo-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-500/50">
-                     <RefreshCw size={32} className="text-white" />
-                   </div>
-                   <h2 className="text-2xl font-black text-white tracking-tight">Recovery Mode</h2>
-                   <p className="text-slate-400 text-sm mt-2">Enter your email to receive a reset link</p>
+                  <div className="bg-indigo-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-indigo-500/50">
+                    <RefreshCw size={32} className="text-white" />
+                  </div>
+                  <h2 className="text-2xl font-black text-white tracking-tight">Recovery Mode</h2>
+                  <p className="text-slate-400 text-sm mt-2">Enter your email to receive a reset link</p>
                 </div>
                 <div className="space-y-4">
-                   <div className="relative">
-                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
-                     <input 
-                       type="email" 
-                       placeholder="e.g. admin@queuemaster.com" 
-                       className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:border-indigo-500 focus:bg-white/10 outline-none transition-all"
-                       value={loginEmail}
-                       onChange={e => setLoginEmail(e.target.value)}
-                     />
-                   </div>
-                   <button onClick={() => setShowForgotPass(false)} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-2xl font-black tracking-widest uppercase text-sm transition-all active:scale-95">Send Reset Code</button>
-                   <button onClick={() => setShowForgotPass(false)} className="w-full text-slate-500 text-xs font-bold hover:text-white transition-colors">Back to Login</button>
+                  <div className="relative">
+                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={20} />
+                    <input 
+                      type="email" 
+                      placeholder="e.g. admin@queuemaster.com" 
+                      className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-4 text-white focus:border-indigo-500 focus:bg-white/10 outline-none transition-all"
+                      value={loginEmail}
+                      onChange={e => setLoginEmail(e.target.value)}
+                    />
+                  </div>
+                  <button onClick={() => setShowForgotPass(false)} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-4 rounded-2xl font-black tracking-widest uppercase text-sm transition-all active:scale-95">Send Reset Code</button>
+                  <button onClick={() => setShowForgotPass(false)} className="w-full text-slate-500 text-xs font-bold hover:text-white transition-colors">Back to Login</button>
                 </div>
               </div>
             ) : isAdminRegistering ? (
               <form onSubmit={handleAdminRegister} className="space-y-6">
                 <div className="text-center mb-8">
-                   <div className="bg-emerald-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
-                     <UserPlus size={32} className="text-white" />
-                   </div>
-                   <h2 className="text-3xl font-black text-white tracking-tighter">Register Admin</h2>
-                   <p className="text-slate-400 text-sm mt-2 font-medium">Create new administrative credentials</p>
+                  <div className="bg-emerald-600 w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                    <UserPlus size={32} className="text-white" />
+                  </div>
+                  <h2 className="text-3xl font-black text-white tracking-tighter">Register Admin</h2>
+                  <p className="text-slate-400 text-sm mt-2 font-medium">Create new administrative credentials</p>
                 </div>
                 <div className="space-y-4">
                   <div className="relative">
@@ -878,11 +1241,11 @@ const handleCallNext = (tellerId: string) => {
             ) : (
               <form onSubmit={handleAdminLogin} className="space-y-6">
                 <div className="text-center mb-8">
-                   <div className="bg-white w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
-                     <Lock size={32} className="text-slate-900" />
-                   </div>
-                   <h2 className="text-3xl font-black text-white tracking-tighter">Admin Portal</h2>
-                   <p className="text-slate-400 text-sm mt-2 font-medium">Verify credentials to access operational data</p>
+                  <div className="bg-white w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                    <Lock size={32} className="text-slate-900" />
+                  </div>
+                  <h2 className="text-3xl font-black text-white tracking-tighter">Admin Portal</h2>
+                  <p className="text-slate-400 text-sm mt-2 font-medium">Verify credentials to access operational data</p>
                 </div>
 
                 <div className="space-y-4">
@@ -945,16 +1308,53 @@ const handleCallNext = (tellerId: string) => {
           <div className="ml-4 px-2 py-1 bg-slate-100 rounded text-xs font-semibold text-slate-600 uppercase">
             {currentRole} Session
           </div>
+          
+          {/* Connection Status */}
           <div className={`flex items-center gap-2 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${
             connectionStatus === 'connected' 
               ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' 
-              : 'bg-amber-100 text-amber-700 border border-amber-200'
+              : connectionStatus === 'connecting'
+                ? 'bg-blue-100 text-blue-700 border border-blue-200 animate-pulse'
+                : 'bg-amber-100 text-amber-700 border border-amber-200'
           }`}>
-            {connectionStatus === 'connected' ? <Wifi size={10} /> : <WifiOff size={10} />}
-            {connectionStatus === 'connected' ? 'Realtime' : 'Offline'}
+            {connectionStatus === 'connected' && <Wifi size={10} />}
+            {connectionStatus === 'connecting' && <RefreshCw size={10} className="animate-spin" />}
+            {connectionStatus === 'disconnected' && <WifiOff size={10} />}
+            
+            {connectionStatus === 'connected' && 'Online'}
+            {connectionStatus === 'connecting' && 'Connecting...'}
+            {connectionStatus === 'disconnected' && 'Offline'}
           </div>
+          
+          {/* Pending Changes */}
+          {pendingChangesCount > 0 && (
+            <div className="flex items-center gap-1 px-2 py-1 bg-blue-100 rounded-full text-[10px] font-black text-blue-700 uppercase tracking-wider">
+              <HardDrive size={10} />
+              {pendingChangesCount} pending
+            </div>
+          )}
+          
+          {/* Sync Button - Manual Only */}
+          {pendingChangesCount > 0 && connectionStatus === 'connected' && !isSyncing && (
+            <button 
+              onClick={handleManualSync}
+              className="flex items-center gap-1 px-2 py-1 bg-indigo-100 hover:bg-indigo-200 rounded-full text-[10px] font-black text-indigo-700 uppercase tracking-wider transition-colors"
+            >
+              <RefreshCw size={10} />
+              Sync Now
+            </button>
+          )}
+          
+          {/* Syncing Indicator */}
+          {isSyncing && (
+            <div className="flex items-center gap-1 px-2 py-1 bg-indigo-100 rounded-full text-[10px] font-black text-indigo-700 uppercase tracking-wider">
+              <RefreshCw size={10} className="animate-spin" />
+              Syncing...
+            </div>
+          )}
+          
           <div className="text-xs font-bold text-slate-500">
-            {clientCount > 0 ? `${clientCount} active users` : 'Connecting...'}
+            {clientCount > 0 ? `${clientCount} active` : ''}
           </div>
         </div>
         
@@ -996,6 +1396,9 @@ const handleCallNext = (tellerId: string) => {
             onDailyReset={handleManualDailyReset}
             dailyResetTime={dailyResetTime}
             categoryCounters={categoryCounters}
+            offlineMode={offlineMode}
+            pendingChangesCount={pendingChangesCount}
+            onSync={handleManualSync}
           />
         )}
         {currentRole === Role.RECEPTION && (
@@ -1008,6 +1411,7 @@ const handleCallNext = (tellerId: string) => {
             onUpdateCategory={handleUpdateCategory}
             onDeleteCategory={handleDeleteCategory}
             dailyResetTime={dailyResetTime}
+            offlineMode={offlineMode}
           />
         )}
         {currentRole === Role.TELLER && isTellerAuthenticated && (
@@ -1018,6 +1422,7 @@ const handleCallNext = (tellerId: string) => {
             onCall={() => handleCallNext(activeTeller.id)} 
             onUpdate={handleUpdateStatus} 
             dailyResetTime={dailyResetTime}
+            offlineMode={offlineMode}
           />
         )}
         {currentRole === Role.MONITOR && (
@@ -1026,6 +1431,7 @@ const handleCallNext = (tellerId: string) => {
             categories={categories}
             tellers={tellers}
             dailyResetTime={dailyResetTime}
+            offlineMode={offlineMode}
           />
         )}
       </main>

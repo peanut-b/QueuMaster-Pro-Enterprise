@@ -7,7 +7,7 @@ let queueSoundBuffer: AudioBuffer | null = null;
 let ws: WebSocket | null = null;
 
 // Audio file path - adjust based on your project structure
-const QUEUE_SOUND_PATH = 'sounds/beep.mp3'; // Changed to beep.mp3
+const QUEUE_SOUND_PATH = 'sounds/Electronic queue sound (Sound effect).mp3'; // Changed to beep.mp3
 
 export const initializeVoiceService = () => {
   // Load the sound file first
